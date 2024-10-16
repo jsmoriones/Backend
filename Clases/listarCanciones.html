@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listar Canciones</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="container mx-auto">
+        <h3 class="text-3xl font-bold dark:text-black text-center">Agregar Cancion</h3>
+        <form action="#" class="w-1/2 mx-auto">
+            <div class="grid gap-6 mt-6">
+                <div>
+                    <label for="titulo" class="block text-lg font-medium text-gray-900 dark:text-slate-800">Titulo</label>
+                    <input type="text" id="titulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Happy" required />
+                </div>
+                <div>
+                    <label for="artista" class="block text-lg font-medium text-gray-900 dark:text-slate-800">Artista</label>
+                    <input type="text" id="artista" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Pharell Williams" required />
+                </div>
+                <div>
+                    <label for="duracion" class="block text-lg font-medium text-gray-900 dark:text-slate-800">Duracion</label>
+                    <input type="text" id="duracion" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="1238" required />
+                </div>
+                <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 inline-block" id="sendForm">Agregar Cancion</button>
+            </div>
+        </form>
+
+        <!--<div class="w-1/2 mx-auto mt-8">
+            <h3 class="text-3xl font-bold dark:text-black text-center mb-5">Lista de Canciones:</h3>
+            <h2 class="text-2xl font-bold dark:text-black">Titulo: </h2>
+            <p class="text-xl text-gray-900">Artista:</p>
+            <p class="text-xl text-gray-900">Duracion: </p>
+        </div>-->
+        <div class="w-1/2 mx-auto mt-8">
+            <h3 class="text-3xl font-bold dark:text-black text-center mb-5">Listado de Playlist:</h3>
+            <p class="text-xl text-gray-900" >Nombre: <span id="playlistnombre"></span></p>
+            <p class="text-xl text-gray-900">Genero: <span id="playlistgenero"></span></p>
+            <ul id="listado-canciones">
+
+            </ul>
+            <button id="mostrar" class="bg-blue-600 px-5 py-2 text-white">Mostrar</button>
+        </div>
+    </div>
+</body>
+    <script src="./ListaCanciones.js"></script>
+</html>
