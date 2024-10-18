@@ -1,0 +1,12 @@
+{
+  "name": "figura",
+  "version": "1.0.0",
+  "main": "Main.js",
+  "type": "module",
+  "scripts": {
+    "start": "Main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
