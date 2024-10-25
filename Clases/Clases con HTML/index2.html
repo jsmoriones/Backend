@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-500">
+  <div class="max-w-2xl mx-auto p-3 my-5 bg-white rounded-xl">
+    <h2 class="text-2xl font-bold dark:text-slate-800 text-center mb-6">Ejercicio: Biblioteca</h2>
+    
+    <form>
+      <div class="mb-6 flex flex-col space-y-5">
+        <div>
+          <label for="titulo" class="block mb-2 text-sm font-medium text-gray-900">Título</label>
+          <input type="text" id="titulo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Escribe le título del libro" required />
+        </div>
+        <div>
+          <label for="autor" class="block mb-2 text-sm font-medium text-gray-900">Autor</label>
+          <input type="text" id="autor" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Escribe el autor del libro" required />
+        </div>
+      </div>
+      <div class="my-6 flex space-x-5 items-center">
+        <div class="flex items-center">
+          <input id="libroDigital" type="radio" value="digital" name="libroInputRadio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+          <label for="libroDigital" class="ms-2 text-sm font-medium text-gray-900">Libro Digital</label>
+        </div>
+        <div class="flex items-center">
+          <input id="libroFisico" type="radio" value="fisico" name="libroInputRadio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+          <label for="libroFisico" class="ms-2 text-sm font-medium text-gray-900">Libro Fisico</label>
+        </div>
+      </div>
+      <div id="otrosCamposLibro">
+        <!-- Aqui se muestran los campos que distintiban a cada libro -->
+      </div>
+      <button type="submit" id="enviarLibro" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center">Enviar</button>
+      <button type="submit" id="listarLibros" class="mt-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full  px-5 py-2.5 text-center">Listar Libros</button>
+
+      <div id="listaDeLibros" class="mt-5">
+
+      </div>
+
+      <div id="validError"></div>
+    </form>
+
+  </div>
+</body>
+  <script src="js/ejercicio2/main.js" type="module"></script>
+</html>
