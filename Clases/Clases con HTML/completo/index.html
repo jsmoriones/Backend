@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SENA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-500">
+  <div class="max-w-2xl mx-auto p-3 my-5 bg-white rounded-xl">
+    <h2 class="text-2xl font-bold dark:text-slate-800 text-center mb-6">Ejercicio: Cuenta Bancaria</h2>
+    <form>
+      <div class="mb-6 flex flex-col space-y-5">
+        <div>
+          <label for="titularCuenta" class="block mb-2 text-sm font-medium text-gray-900">Titular de la Cuenta</label>
+          <input type="text" id="titularCuenta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Jose Barreras" required />
+        </div>
+        <div>
+          <label for="numeroCuenta" class="block mb-2 text-sm font-medium text-gray-900">Número de la Cuenta</label>
+          <input type="number" id="numeroCuenta" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="556654165" required />
+        </div>
+        <div>
+          <label for="saldoInicial" class="block mb-2 text-sm font-medium text-gray-900">Saldo Inicial</label>
+          <input type="number" id="saldoInicial" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="300" required />
+        </div>
+        <div>
+          <div class="flex items-center mb-4">
+              <input id="default-radio-1" type="radio" value="corriente" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+              <label for="default-radio-1" class="ms-2 text-sm font-medium text-gray-900">Cuenta Corriente</label>
+          </div>
+          <div class="flex items-center">
+              <input checked id="default-radio-2" type="radio" value="ahorros" name="default-radio" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500">
+              <label for="default-radio-2" class="ms-2 text-sm font-medium text-gray-900">Cuenta de Ahorros</label>
+          </div>
+        </div>
+
+        <button type="submit" id="enviarCuenta" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Enviar</button>
+
+        <button type="submit" id="listarCuentas" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Listar</button>
+      </div>
+    </form>
+
+    <h2 class="text-2xl font-bold dark:text-slate-800 mb-3">Resultado:</h2>
+    <div class="flex justify-between items-center space-x-5">
+      <div class="p-2 bg-zinc-100 mb-2 rounded-lg">
+        <p class="text-lg text-gray-500 font-bold">Lista de Cuentas Corrientes</p>
+        <div id="contenedorCuentaCorriente"></div>
+      </div>
+      <div class="p-2 bg-zinc-100 mb-2 rounded-lg">
+        <p class="text-lg text-gray-500 font-bold">Lista de Cuentas Ahorros</p>
+        <div id="contenedorCuentaAhorros"></div>
+      </div>
+    </div>
+    <div id="contenedorDeValores">
+      
+    </div>
+  </div>
+</body>
+  <script src="js/ejercicio1/main.js" type="module"></script>
+  <!-- <script src="js/index2.js"></script> -->
+  <!-- <script src="js/index3.js"></script> -->
+  <!-- <script src="js/index4.js"></script> -->
+  <!-- <script src="js/index5.js"></script> -->
+  <!-- <script src="js/index6.js"></script> -->
+  <!-- <script src="js/index7.js"></script> -->
+</html>
