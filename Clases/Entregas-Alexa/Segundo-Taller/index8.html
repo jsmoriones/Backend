@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Cursos y Promedios</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    form {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    form div {
+      margin-bottom: 10px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #45a049;
+    }
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Cursos</h1>
+
+    <form id="form-curso">
+      <h2>Agregar Curso</h2>
+      <div>
+        <label for="nombreCurso">Nombre del Curso:</label>
+        <input type="text" id="nombreCurso" required>
+      </div>
+      <button type="submit">Agregar Curso</button>
+    </form>
+
+    <form id="form-estudiante" class="hidden">
+      <h2>Agregar Estudiante</h2>
+      <div>
+        <label for="nombreEstudiante">Nombre del Estudiante:</label>
+        <input type="text" id="nombreEstudiante" required>
+      </div>
+      <div>
+        <label for="edadEstudiante">Edad:</label>
+        <input type="number" id="edadEstudiante" min="1" required>
+      </div>
+      <button type="submit">Agregar Estudiante</button>
+    </form>
+
+    <form id="form-calificacion" class="hidden">
+      <h2>Agregar Calificación</h2>
+      <div>
+        <label for="calificacion">Calificación (1-5):</label>
+        <input type="number" id="calificacion" min="1" max="5" required>
+      </div>
+      <button type="submit">Agregar Calificación</button>
+    </form>
+
+    <h2>Lista de Cursos y Estudiantes</h2>
+    <div id="lista-cursos"></div>
+  </div>
+
+  <script src="index8.js"></script>
+  <script>
+    const cursos = [];
+    let cursoSeleccionado = null;
+    let estudianteSeleccionado = null;
+
+    const formCurso = document.getElementById("form-curso");
+    const formEstudiante = document.getElementById("form-estudiante");
+    const formCalificacion = document.getElementById("form-calificacion");
+    const listaCursos = document.getElementById("lista-cursos");
+
+    // Agregar curso
+    formCurso.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const nombreCurso = document.getElementById("nombreCurso").value;
+      const curso = new Curso(nombreCurso);
+      cursos.push(curso);
+      actualizarListaCursos();
+      formCurso.reset();
+    });
+
+    // Agregar estudiante
+    formEstudiante.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const nombreEstudiante = document.getElementById("nombreEstudiante").value;
+      const edadEstudiante = parseInt(document.getElementById("edadEstudiante").value);
+      const estudiante = new Estudiante(nombreEstudiante, edadEstudiante);
+      cursoSeleccionado.agregarEstu(estudiante);
+      actualizarListaCursos();
+      formEstudiante.reset();
+    });
+
+    // Agregar calificación
+    formCalificacion.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const calificacion = parseFloat(document.getElementById("calificacion").value);
+      estudianteSeleccionado.agregarCalificacion(calificacion);
+      actualizarListaCursos();
+      formCalificacion.reset();
+    });
+
+    function actualizarListaCursos() {
+      listaCursos.innerHTML = "";
+      cursos.forEach((curso, index) => {
+        const divCurso = document.createElement("div");
+        divCurso.innerHTML = `
+          <h3>${curso.nombreCurso}</h3>
+          <button onclick="seleccionarCurso(${index})">Agregar Estudiante</button>
+          <ul>
+            ${curso
+              .calcularNotas()
+              .map((est, i) => `
+                <li>
+                  ${est.nombre} (Edad: ${est.edad}) - Promedio: ${est.calcularPromedio() || "N/A"}
+                  <button onclick="seleccionarEstudiante(${index}, ${i})">Agregar Calificación</button>
+                </li>
+              `)
+              .join("")}
+          </ul>
+        `;
+        listaCursos.appendChild(divCurso);
+      });
+    }
+
+    function seleccionarCurso(index) {
+      cursoSeleccionado = cursos[index];
+      formEstudiante.classList.remove("hidden");
+      formCalificacion.classList.add("hidden");
+    }
+
+    function seleccionarEstudiante(cursoIndex, estudianteIndex) {
+      cursoSeleccionado = cursos[cursoIndex];
+      estudianteSeleccionado = cursoSeleccionado.calcularNotas()[estudianteIndex];
+      formCalificacion.classList.remove("hidden");
+    }
+  </script>
+</body>
+</html>

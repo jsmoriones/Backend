@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Vehículos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    form {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    form div {
+      margin-bottom: 10px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Vehículos</h1>
+
+    <form id="form-vehiculo">
+      <h2>Agregar Vehículo</h2>
+      <div>
+        <label for="marca">Marca:</label>
+        <input type="text" id="marca" name="marca" required>
+      </div>
+      <div>
+        <label for="modelo">Modelo:</label>
+        <input type="text" id="modelo" name="modelo" required>
+      </div>
+      <div>
+        <label for="anio">Año:</label>
+        <input type="number" id="anio" name="anio" min="1900" max="2024" required>
+      </div>
+      <div>
+        <label for="tipo">Tipo de Vehículo:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="auto">Auto</option>
+          <option value="moto">Moto</option>
+        </select>
+      </div>
+      <button type="submit">Agregar Vehículo</button>
+    </form>
+
+    <h2>Autos</h2>
+    <table id="autos-table">
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Motos</h2>
+    <table id="motos-table">
+      <thead>
+        <tr>
+          <th>Marca</th>
+          <th>Modelo</th>
+          <th>Año</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="index7.js"></script>
+  <script>
+    const vehiculo = new Vehiculo();
+
+    const form = document.getElementById("form-vehiculo");
+
+    // Manejar el formulario de agregar vehículos
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const marca = document.getElementById("marca").value;
+      const modelo = document.getElementById("modelo").value;
+      const anio = parseInt(document.getElementById("anio").value);
+      const tipo = document.getElementById("tipo").value;
+
+      if (tipo === "auto") {
+        const auto = new Auto(marca, modelo, anio);
+        vehiculo.almacenV("auto", auto);
+        actualizarTabla("autos-table", vehiculo.listarVehiculos("auto"));
+      } else if (tipo === "moto") {
+        const moto = new Moto(marca, modelo, anio);
+        vehiculo.almacenV("moto", moto);
+        actualizarTabla("motos-table", vehiculo.listarVehiculos("moto"));
+      }
+
+      form.reset(); // Limpiar formulario
+    });
+
+    // Actualizar tablas de vehículos
+    function actualizarTabla(tableId, listaVehiculos) {
+      const tbody = document.getElementById(tableId).querySelector("tbody");
+      tbody.innerHTML = ""; // Limpiar la tabla
+      listaVehiculos.forEach((vehiculo) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${vehiculo.marca}</td>
+          <td>${vehiculo.modelo}</td>
+          <td>${vehiculo.anio}</td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>

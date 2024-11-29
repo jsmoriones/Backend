@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Transportes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-section, .output-section {
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin: 5px 0;
+        }
+        .output-section {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Gestión de Transportes</h1>
+
+    <!-- Formulario para ingresar transportes -->
+    <div class="form-section">
+        <h2>Agregar Transporte</h2>
+        <form id="formTransporte">
+            <label for="tipo">Tipo de Transporte:</label>
+            <select id="tipo" required>
+                <option value="autobus">Autobús</option>
+                <option value="bicicleta">Bicicleta</option>
+            </select>
+
+            <label for="capacidad">Capacidad:</label>
+            <input type="number" id="capacidad" placeholder="Ej: 50" required>
+
+            <label for="tipoCombustible">Tipo de Combustible:</label>
+            <input type="text" id="tipoCombustible" placeholder="Ej: Diésel, No aplica">
+
+            <!-- Campos adicionales según el tipo -->
+            <div id="extraCampos"></div>
+
+            <button type="submit">Agregar Transporte</button>
+        </form>
+    </div>
+
+    <!-- Sección de resultados -->
+    <div class="output-section">
+        <h2>Listado de Transportes</h2>
+        <button onclick="listarTransportes('autobus')">Listar Autobuses</button>
+        <button onclick="listarTransportes('bicicleta')">Listar Bicicletas</button>
+        <ul id="listaTransportes"></ul>
+    </div>
+    <script src="index9.js"></script>
+    <script>
+        const transporteManager = new Transporte();
+
+        // Formulario dinámico según el tipo de transporte
+        const tipoSelect = document.getElementById('tipo');
+        const extraCampos = document.getElementById('extraCampos');
+
+        tipoSelect.addEventListener('change', () => {
+            extraCampos.innerHTML = '';
+            if (tipoSelect.value === 'autobus') {
+                extraCampos.innerHTML = `
+                    <label for="potencia">Potencia:</label>
+                    <input type="number" id="potencia" placeholder="Ej: 300">
+                `;
+            } else if (tipoSelect.value === 'bicicleta') {
+                extraCampos.innerHTML = `
+                    <label for="marca">Marca:</label>
+                    <input type="text" id="marca" placeholder="Ej: Trek">
+                `;
+            }
+        });
+
+        // Manejo del formulario
+        document.getElementById('formTransporte').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const capacidad = parseInt(document.getElementById('capacidad').value);
+            const tipoCombustible = document.getElementById('tipoCombustible').value;
+            const tipo = tipoSelect.value;
+
+            if (tipo === 'autobus') {
+                const potencia = parseInt(document.getElementById('potencia').value);
+                const autobus = new Autobus(capacidad, tipoCombustible, potencia);
+                transporteManager.guardarTransporte(autobus);
+            } else if (tipo === 'bicicleta') {
+                const marca = document.getElementById('marca').value;
+                const bicicleta = new Bicicleta(capacidad, tipoCombustible, marca);
+                transporteManager.guardarTransporte(bicicleta);
+            }
+
+            alert('Transporte agregado con éxito.');
+            e.target.reset();
+            extraCampos.innerHTML = '';
+        });
+
+        // Listar transportes
+        function listarTransportes(tipo) {
+            const lista = transporteManager.listarTransporte(tipo);
+            const listaTransportes = document.getElementById('listaTransportes');
+            listaTransportes.innerHTML = '';
+
+            if (lista && lista.length > 0) {
+                lista.forEach((transporte, index) => {
+                    const li = document.createElement('li');
+                    li.textContent = `#${index + 1}: ${tipo === 'autobus' ? `Autobús - Capacidad: ${transporte.capacidad}, Combustible: ${transporte.tipoCombustible}, Potencia: ${transporte.potencia}` : `Bicicleta - Capacidad: ${transporte.capacidad}, Marca: ${transporte.marca}`}`;
+                    listaTransportes.appendChild(li);
+                });
+            } else {
+                listaTransportes.innerHTML = `<li>No hay transportes de tipo ${tipo} registrados.</li>`;
+            }
+        }
+    </script>
+</body>
+</html>

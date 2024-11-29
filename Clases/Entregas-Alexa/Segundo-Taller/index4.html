@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Animales</title>
+  <style>
+    html, body{
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .divider{
+      background-color: #CCCCCC;
+      padding: .8rem;
+      border-bottom: 1px solid #F90;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gestión de Animales</h1>
+
+  <form id="formAnimal">
+    <h2>Registrar Animal</h2>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+    <br>
+    <label for="especie">Especie:</label>
+    <select id="especie">
+      <option value="Leon">León</option>
+      <option value="Elefante">Elefante</option>
+      <option value="Tigre">Tigre</option>
+    </select>
+    <br>
+    <button type="button" id="btnRegistrarAnimal">Registrar</button>
+  </form>
+
+  <h2>Acciones de Animales</h2>
+  <button type="button" id="btnListarLeones">Listar Leones</button>
+  <button type="button" id="btnListarElefantes">Listar Elefantes</button>
+  <button type="button" id="btnListarTigres">Listar Tigres</button>
+  <br><br>
+  <button type="button" id="btnAccionLeon">Rugir León</button>
+  <button type="button" id="btnAccionElefante">Trompetear Elefante</button>
+  <button type="button" id="btnAccionTigre">Rugir Tigre</button>
+
+  <h3>Resultados:</h3>
+  <h4 id="titulo"></h4>
+  <div id="resultados"></div>
+
+  <script src="index4.js"></script>
+  <script>
+    // Crear contenedores iniciales para las especies
+    const leones = new Leon();
+    const elefantes = new Elefante();
+    const tigres = new Tigre();
+    let template;
+    let template2;
+    let template3;
+
+    document.getElementById('btnRegistrarAnimal').addEventListener('click', () => {
+      const nombre = document.getElementById('nombre').value;
+      const especie = document.getElementById('especie').value;
+
+      let animal;
+      switch (especie) {
+        case "Leon":
+          animal = new Leon(nombre, especie);
+          leones.agregarAnimal(animal);
+          break;
+        case "Elefante":
+          animal = new Elefante(nombre, especie);
+          elefantes.agregarAnimal(animal);
+          break;
+        case "Tigre":
+          animal = new Tigre(nombre, especie);
+          tigres.agregarAnimal(animal);
+          break;
+      }
+
+      document.getElementById('resultados').innerText = `${nombre} (${especie}) fue registrado exitosamente.`;
+    });
+
+    document.getElementById('btnListarLeones').addEventListener('click', () => {
+      document.getElementById('resultados').innerHTML = ""
+      document.querySelector("#titulo").innerText = "Listado de Leones"
+      leones.listarLeon().map(leon => {
+        template = `
+          <div class="divider">
+            <p>Nombre: ${leon.nombre}</p>
+            <p>Especie: ${leon.especie}</p>
+          <div>
+        `
+        document.getElementById('resultados').innerHTML += template;
+      })
+    });
+
+    document.getElementById('btnListarElefantes').addEventListener('click', () => {
+      document.getElementById('resultados').innerHTML = ""
+      document.querySelector("#titulo").innerText = "Listado de Leones"
+      elefantes.listarElefante().map(elefante => {
+        template2 = `
+          <div class="divider">
+            <p>Nombre: ${elefante.nombre}</p>
+            <p>Especie: ${elefante.especie}</p>
+          <div>
+        `
+        document.getElementById('resultados').innerHTML += template2;
+      })
+    });
+
+    document.getElementById('btnListarTigres').addEventListener('click', () => {
+      document.getElementById('resultados').innerHTML = ""
+      document.querySelector("#titulo").innerText = "Listado de Leones"
+      tigres.listarTigres().map(tigre => {
+        template3 = `
+          <div class="divider">
+            <p>Nombre: ${tigre.nombre}</p>
+            <p>Especie: ${tigre.especie}</p>
+          <div>
+        `
+        document.getElementById('resultados').innerHTML += template3;
+      })
+    });
+
+    document.getElementById('btnAccionLeon').addEventListener('click', () => {
+      leones.rugir();
+      document.getElementById('resultados').innerText = "El león está rugiendo. Mira la consola.";
+    });
+
+    document.getElementById('btnAccionElefante').addEventListener('click', () => {
+      elefantes.trompetear();
+      document.getElementById('resultados').innerText = "El elefante está trompeteando. Mira la consola.";
+    });
+
+    document.getElementById('btnAccionTigre').addEventListener('click', () => {
+      tigres.rugir();
+      document.getElementById('resultados').innerText = "El tigre está rugiendo. Mira la consola.";
+    });
+  </script>
+</body>
+</html>

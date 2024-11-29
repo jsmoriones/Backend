@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Productos</title>
+  <style>
+    html, body{
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .divider{
+      background-color: #CCCCCC;
+      padding: .8rem;
+      border-bottom: 1px solid #F90;
+    }
+  </style>
+</head>
+<body>
+  <h1>Gestión de Productos</h1>
+
+  <form id="formProducto">
+    <h2>Agregar Producto</h2>
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" required>
+    <br>
+    <label for="precio">Precio:</label>
+    <input type="number" id="precio" required>
+    <br>
+    <label for="cantidadEnStock">Cantidad en Stock:</label>
+    <input type="number" id="cantidadEnStock" required>
+    <br>
+    <label for="marca">Marca (Solo para Electrodomésticos):</label>
+    <input type="text" id="marca">
+    <br>
+    <button type="button" id="btnAgregarProducto">Agregar Producto</button>
+  </form>
+
+  <h2>Acciones</h2>
+  <button type="button" id="btnListarProductos">Listar Productos con Stock < 10</button>
+
+  <h3>Resultados:</h3>
+  <div id="resultados"></div>
+
+  <script src="index5.js"></script>
+  <script>
+    const productos = new Producto();
+    let template;
+
+    document.getElementById('btnAgregarProducto').addEventListener('click', () => {
+      const nombre = document.getElementById('nombre').value;
+      const precio = parseFloat(document.getElementById('precio').value);
+      const cantidadEnStock = parseInt(document.getElementById('cantidadEnStock').value);
+      const marca = document.getElementById('marca').value;
+
+      let producto;
+      if (marca) {
+        producto = new Electrodomestico(nombre, precio, cantidadEnStock, marca);
+      } else {
+        producto = new Producto(nombre, precio, cantidadEnStock);
+      }
+
+      productos.almacenarProducto(producto);
+
+      document.getElementById('resultados').innerText = `Producto ${nombre} agregado exitosamente.`;
+    });
+
+    document.getElementById('btnListarProductos').addEventListener('click', () => {
+      productos.listarProductos();
+      document.getElementById('resultados').innerText = "Consulta la consola para ver los productos con stock < 10.";
+      productos.listarProductos().map(producto => {
+        template = `
+          <div class="divider">
+            <p>Marca: ${producto.marca}</p>
+            <p>Nombre: ${producto.nombre}</p>
+            <p>Precio: ${producto.precio}</p>
+            <p>Stock: ${producto.cantidadEnStock}</p>
+          <div>
+        `
+        document.getElementById('resultados').innerHTML += template;
+      })
+    });
+  </script>
+</body>
+</html>

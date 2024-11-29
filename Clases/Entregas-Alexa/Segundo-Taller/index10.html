@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Mascotas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-section, .output-section {
+            margin-bottom: 20px;
+        }
+        .form-section label {
+            display: block;
+            margin: 5px 0;
+        }
+        .output-section {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Registro de Mascotas</h1>
+
+    <!-- Formulario para registrar mascotas -->
+    <div class="form-section">
+        <h2>Agregar Mascota</h2>
+        <form id="formMascota">
+            <label for="nombre">Nombre de la Mascota:</label>
+            <input type="text" id="nombre" placeholder="Ej: Firulais" required>
+
+            <label for="tipo">Tipo de Mascota:</label>
+            <select id="tipo" required>
+                <option value="perro">Perro</option>
+                <option value="gato">Gato</option>
+            </select>
+
+            <button type="submit">Registrar Mascota</button>
+        </form>
+    </div>
+
+    <!-- Sección de listado y acciones -->
+    <div class="output-section">
+        <h2>Listado de Mascotas</h2>
+        <button onclick="listarMascotas('perro')">Listar Perros</button>
+        <button onclick="listarMascotas('gato')">Listar Gatos</button>
+        <ul id="listaMascotas"></ul>
+    </div>
+
+    <script src="index10.js"></script>
+    <script>
+        const perrosManager = new Perro();
+        const gatosManager = new Gato();
+
+        // Manejo del formulario
+        document.getElementById('formMascota').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const tipo = document.getElementById('tipo').value;
+
+            if (tipo === 'perro') {
+                const perro = new Perro(nombre, tipo);
+                perrosManager.agregarPerro(perro);
+            } else if (tipo === 'gato') {
+                const gato = new Gato(nombre, tipo);
+                gatosManager.agregarGato(gato);
+            }
+
+            alert('Mascota registrada con éxito.');
+            e.target.reset();
+        });
+
+        // Listar mascotas
+        function listarMascotas(tipo) {
+            const listaMascotas = document.getElementById('listaMascotas');
+            listaMascotas.innerHTML = '';
+
+            let mascotas = [];
+            if (tipo === 'perro') {
+                mascotas = perrosManager.listarPerros();
+            } else if (tipo === 'gato') {
+                mascotas = gatosManager.listarGatos();
+            }
+
+            if (mascotas && mascotas.length > 0) {
+                mascotas.forEach((mascota, index) => {
+                    const li = document.createElement('li');
+                    if (tipo === 'perro') {
+                        li.textContent = `#${index + 1}: Perro - Nombre: ${mascota.nombre}`;
+                    } else if (tipo === 'gato') {
+                        li.textContent = `#${index + 1}: Gato - Nombre: ${mascota.nombre}`;
+                    }
+                    listaMascotas.appendChild(li);
+                });
+            } else {
+                listaMascotas.innerHTML = `<li>No hay mascotas del tipo ${tipo} registradas.</li>`;
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gestión de Empleados</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    h1, h2 {
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    form {
+      margin-bottom: 20px;
+      padding: 10px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    form div {
+      margin-bottom: 10px;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    form input, form select {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+    }
+    form button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gestión de Empleados</h1>
+
+    <form id="form-empleado">
+      <h2>Agregar Empleado</h2>
+      <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+      </div>
+      <div>
+        <label for="sueldo">Sueldo Base:</label>
+        <input type="number" id="sueldo" name="sueldo" required>
+      </div>
+      <div>
+        <label for="tipo">Tipo de Empleado:</label>
+        <select id="tipo" name="tipo" required>
+          <option value="completo">Tiempo Completo</option>
+          <option value="medio">Medio Tiempo</option>
+        </select>
+      </div>
+      <div id="horas-container" style="display: none;">
+        <label for="horas">Horas Trabajadas (solo para Medio Tiempo):</label>
+        <input type="number" id="horas" name="horas" min="1">
+      </div>
+      <button type="submit">Agregar Empleado</button>
+    </form>
+
+    <h2>Empleados de Tiempo Completo</h2>
+    <table id="empleados-completo">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Sueldo Base</th>
+          <th>Sueldo Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <h2>Empleados de Medio Tiempo</h2>
+    <table id="empleados-medio">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Sueldo Base</th>
+          <th>Horas Trabajadas</th>
+          <th>Sueldo Total</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+
+  <script src="index6.js"></script>
+  <script>
+    const empleadosCompleto = new EmpleadoTiempoCompleto();
+    const empleadosMedio = new EmpleadoMedioTiempo();
+
+    const form = document.getElementById("form-empleado");
+    const tipoSelect = document.getElementById("tipo");
+    const horasContainer = document.getElementById("horas-container");
+
+    // Mostrar u ocultar el campo de horas según el tipo de empleado
+    tipoSelect.addEventListener("change", () => {
+      if (tipoSelect.value === "medio") {
+        horasContainer.style.display = "block";
+      } else {
+        horasContainer.style.display = "none";
+      }
+    });
+
+    // Agregar empleados al formulario
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const sueldo = parseFloat(document.getElementById("sueldo").value);
+      const tipo = document.getElementById("tipo").value;
+
+      if (tipo === "completo") {
+        const empleado = new EmpleadoTiempoCompleto(nombre, sueldo);
+        empleadosCompleto.guardarEmpleados(empleado);
+        actualizarTabla("empleados-completo", empleadosCompleto);
+      } else if (tipo === "medio") {
+        const horas = parseFloat(document.getElementById("horas").value);
+        const empleado = new EmpleadoMedioTiempo(nombre, sueldo, horas);
+        empleadosMedio.guardarEmpleados(empleado);
+        actualizarTabla("empleados-medio", empleadosMedio, true);
+      }
+
+      form.reset();
+      horasContainer.style.display = "none"; // Oculta el campo de horas por defecto
+    });
+
+    // Actualizar las tablas
+    function actualizarTabla(id, empleados, esMedioTiempo = false) {
+      const tbody = document.getElementById(id).querySelector("tbody");
+      tbody.innerHTML = ""; // Limpiar la tabla
+      empleados.listarEmpleados().forEach((empleado) => {
+        const row = document.createElement("tr");
+        if (esMedioTiempo) {
+          row.innerHTML = `
+            <td>${empleado.nombre}</td>
+            <td>${empleado.sueldo}</td>
+            <td>${empleado.horas}</td>
+            <td>${empleado.calcularSueldo()}</td>
+          `;
+        } else {
+          row.innerHTML = `
+            <td>${empleado.nombre}</td>
+            <td>${empleado.sueldo}</td>
+            <td>${empleado.calcularSueldo()}</td>
+          `;
+        }
+        tbody.appendChild(row);
+      });
+    }
+  </script>
+</body>
+</html>
