@@ -1,12 +1,14 @@
 import express from "express";
 const router = express.Router();
 import Canciones from "../models/cancionesModel.js";
+import { upload } from "../middleware/multerFile.js";
 
 /* Metodo de Crear */
-router.post("/", async (req, res) => {
+router.post("/", upload.single("file"), async (req, res) => {
     try {
         //creo la instancia de la cancion con el model
-        const nuevaCancion = new Canciones(req.body);
+        let imagenCreada = req.file ? req.file.filename : "default.png";
+        const nuevaCancion = new Canciones({...req.body, caratula: imagenCreada});
 
         //guardo en mongo la nueva cancion
         const cancionGuardada = await nuevaCancion.save();

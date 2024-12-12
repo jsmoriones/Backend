@@ -6,7 +6,8 @@ const CancionesSchema = new mongoose.Schema({
     anio: { type: String, required: true },
     album: { type: String, required: true },
     genero: { type: String, required: true },
-    duracion: { type: String, required: true }
+    duracion: { type: String, required: true },
+    caratula: {type: String, required: false}
 });
 
 const Canciones = mongoose.model("Canciones", CancionesSchema);
