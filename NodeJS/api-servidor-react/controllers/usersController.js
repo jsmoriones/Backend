@@ -153,7 +153,7 @@ class Users {
             }
 
             //Actualizamos el rol del usuario por su uid
-            const userUpdate = await UserModel.updateRolUser(id);
+            const userUpdate = await UserModel.updateRolUser(id, req.body.rol);
 
             return res.json({
                 ok: true,

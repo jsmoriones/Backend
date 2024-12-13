@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Panel</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container header">
+        <h1>Registrar Usuario</h1>
+        <button id="logoutBtn" class="btnLogout">Logout</button>
+    </div>
+
+    <div class="container content">
+        <form id="addUser">
+            <div class="field_container">
+                <label for="username" class="field_label">Escribe tu username</label>
+                <input type="text" placeholder="Username" name="username" id="username" class="field_input" required />
+            </div>
+            <div class="field_container">
+                <label for="email" class="field_label">Escribe tu Email</label>
+                <input type="email" placeholder="Email" name="email" id="email" class="field_input" required />
+            </div>
+            <div class="field_container">
+                <label for="password" class="field_label">Escribe tu Contraseña</label>
+                <input type="password" placeholder="Contraseña" name="password" id="password" class="field_input" required />
+            </div>
+            <div>
+                <button type="submit" class="btnAddU">Registrar</button>
+            </div>
+        </form>
+    </div>
+
+</body>
+    <script src="/js/axios.min.js"></script>
+    <script>
+        const addUser = document.querySelector("#addUser");
+
+        addUser.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const username = e.target.username.value;
+            const email = e.target.email.value;
+            const password = e.target.password.value;
+
+            try {
+                const data = await axios.post("/api/register", {
+                    username, email, password
+                });
+
+                console.log(data);
+
+                window.location.href="/admin"
+            } catch (error) {
+                console.log(error);
+            }
+        });
+    </script>
+</html>

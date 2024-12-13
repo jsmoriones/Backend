@@ -1,7 +1,7 @@
 import bcryptjs from "bcryptjs";
 import db from "../database/config.js";
 
-class User {n  
+class User {
     static async create({email, password, username}){
         let result = await db.query(`INSERT INTO users(email, contrasenia, username) VALUES (?, ?, ?)`, [email, password, username]);
 
@@ -20,10 +20,11 @@ class User {n
         let [user] = await db.query("SELECT * FROM users WHERE uid = ?", [uid]);
         return user;
     }
-    static async updateRolUser (uid) {
+    static async updateRolUser (uid, rol) {
         try {
+            console.log(uid, rol)
             //Actualizamos primero al usuario
-            const [resultUpdate] = await db.query("UPDATE users SET roleId = 2 WHERE uid = ?", [uid]);
+            const [resultUpdate] = await db.query("UPDATE users SET roleId = ? WHERE uid = ?", [rol, uid]);
 
             if(resultUpdate.affectedRows === 0){ //esto verifica si se uso o no la actualizacion
                 throw new Error(`No user found with UID: ${uid}`);

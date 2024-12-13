@@ -14,4 +14,12 @@ router.get("/profile", (req, res) => {
     res.sendFile(publicpath + "/profile.html")
 })
 
+router.get("/admin", (req, res) => {
+    res.sendFile(publicpath + "/admin.html")
+})
+
+router.get("/admin/crear-usuario", (req, res) => {
+    res.sendFile(publicpath + "/adminRegister.html")
+})
+
 export default router;

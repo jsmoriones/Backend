@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Panel</title>
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <div class="container header">
+        <h1>Administrator Panel</h1>
+        <div>
+            <a href="/admin/crear-usuario" class="btnCreateU">+ Crear Usuario</a>
+            <button id="logoutBtn" class="btnLogout">Logout</button>
+        </div>
+    </div>
+
+    <h2>Users Veterinary</h2>
+    <ul id="ulClientVets"></ul>
+
+    <h2>Users Client</h2>
+    <ul id="ulClientUsers"></ul>
+
+
+</body>
+    <script src="/js/axios.min.js"></script>
+    <script>
+        const logoutBtn = document.querySelector("#logoutBtn");
+        const ulClientVets = document.querySelector("#ulClientVets");
+        const ulClientUsers = document.querySelector("#ulClientUsers");
+        const btnCreateU = document.querySelector("#btnCreateU")
+
+        //extraigo el token de localStorage
+        const token = localStorage.getItem("token");
+        //verifico que exista el token
+        if(!token){
+            //si no existe lo redirijo a login
+            window.location.href = "/login";
+        }
+
+        //codigo para cerrar sesion
+        logoutBtn.addEventListener("click", () => {
+            //borramos token y redirijimos a login
+            localStorage.removeItem("token");
+            window.location.href = "/login";
+        });
+        const getUsers = async () => {
+            try {
+                //realizamos la peticion a la api
+                const {data} = await axios.get("/api/users", {
+                    headers: {
+                        //por headers pasamos el token por authorization
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                //el arreglo de users lo asignamos a una variable users
+                const { msg: users } = data;
+
+                //vaciamos el html de los contenedores
+                ulClientUsers.textContent = "";
+                ulClientVets.textContent = "";
+
+
+                users.forEach(user => {
+                    if(user.roleId === 1) return;
+
+
+                    const li = document.createElement("LI");
+                    li.textContent = user.username;
+                    //Si son usuarios normales
+                    if(user.roleId === 3){
+                        const button = document.createElement("BUTTON");
+                        button.classList.add("upVet")
+                        button.textContent = "Promover a Veterinario";
+                        button.addEventListener("click", async () => {
+                            if(!confirm("¿Estas seguro de que quieres promover este usuario a veterinario?")){
+                                return;
+                            }
+
+                            try {
+                                const {data} = await axios.put(`/api/update-rol-user/${user.uid}`,{rol: 2}, {
+                                    headers: {
+                                        Authorization: `Bearer ${token}`
+                                    }
+                                });
+
+                                //Solo pasa cuando presiono el boton, por eso no se vuelve un ciclo
+                                getUsers();
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        });
+                        li.appendChild(button);
+                        ulClientUsers.appendChild(li);
+                        return;
+                    }
+
+                    //Si son veterinarios
+                    const btnVet = document.createElement("BUTTON");
+                    btnVet.classList.add("upVet");
+                    btnVet.textContent = "Dar de baja";
+                    btnVet.addEventListener("click", async (e) => {
+                        if(!confirm("¿Estas seguro de realizar esta accion?")){
+                            return;
+                        }
+
+                        try {
+                            const {data} = await axios.put(`/api/update-rol-user/${user.uid}`,{rol: 3}, {
+                                headers: {
+                                    Authorization: `Bearer ${token}`
+                                }
+                            });
+
+                            //Solo pasa cuando presiono el boton, por eso no se vuelve un ciclo
+                            getUsers();
+                        } catch (error) {
+                            console.log(error)
+                        }
+                    });
+                    li.appendChild(btnVet)
+                    ulClientVets.appendChild(li)
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        getUsers();
+    </script>
+</html>
