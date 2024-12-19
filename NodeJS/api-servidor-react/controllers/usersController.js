@@ -91,12 +91,14 @@ class Users {
                 }
             );
 
+            const {email: emailUser, username, roleId, ocupacion} = user;
             //Envio el token con el mensaje de todo correcto
             return res.json({
                 ok:true,
                 msg: {
                     token,
-                    role_id: user.roleId
+                    role_id: user.roleId,
+                    infoUser: {emailUser, username, roleId, ocupacion}
                 }
             })
         } catch (error) {

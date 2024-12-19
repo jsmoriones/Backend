@@ -1,88 +1,221 @@
+/*
+    Custom Styles
+*/
 *, *::after, *::before{
     border: 0;
     padding: 0;
     margin: 0;
-}
-
-html{
     box-sizing: border-box;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 16px;
+}
+.white2{color: #cccccc;}
+.color1{color: #09314B;}
+.color2{color: #DD3D24;}
+.color3{color:#00f2c3}
+.color4{color:#1d8cf8;}
+.color5{color:#00f2c3;}
+.color6{color:#fd5d93;}
+.fs-7{font-size: .8rem;}
+.border-bottom-table{border-bottom: 1px solid #cccccc47;}
+
+/*
+    Profile Style
+*/
+.bg-primary-custom{
+    background-color: #09314B;
+}
+.avatar-dash{
+    width: 30px;
+    height: 30px;
+}
+.border-top-body{
+    border-top: 2px solid #DD3D24;
 }
 
-body{
-    font-size: 1rem;
+.fs-custom-arrow{
+    font-size: .6rem;
+}
+.drop-user-admin-custom{
+    font-size: .7rem;
+    color:  #8d8d8d;
+}
+.drop-user-admin-custom:hover{ color:  #8d8d8d; }
+.drop-user-admin-custom:active{
+    color: #DD3D24;
+    background-color: #f2f2f2;
 }
 
-.container{
-    max-width: 1200px;
-    margin: 0 auto;
+/*
+    Admin Styles
+*/
+.Header{
+    padding: 0 3rem;
 }
-
-.header{
+.Principal-contenedor{
+    /*background-color: rgba(255,255,255,.6);*/
+    padding: 0 1rem;
     display: flex;
-    justify-content: space-between;
+    overflow: hidden;
+    column-gap: 2rem;
+}
+.Menu-dashboard{
+    /*background-color: #DD3D24;*/
+    border-radius: .3rem;
+    transition: width .3s linear;
+    width: 80px;
+}
+.Content-dashboard{
+    /*background-color: rgba(255,255,255,.1);*/
+    border-radius: .3rem;
+    flex-grow: 1;
+    width: 50%;
+    margin-bottom: 5rem;
+}
+.bg-op-cards{background-color: rgba(255,255,255,.1);}
+.largeMenuDashboard{
+    width: 220px;
+    align-items: flex-start !important;
+}
+.Menu-dashboard .btn-menu{ padding: .19rem; }
+.Menu-dashboard .btn-menu p{
+    /*width: 25px;*/
+    /*height: 25px;*/
+    margin-bottom: 0;
+    transition: all .3s ease-in-out;
+    left: -500px;
+    opacity: 1;
+}
+.Menu-dashboard .btn-menu:hover{
+    background-color: #ffffff57 !important;
+}
+.menushowtext{
+    position:  relative !important;
+    left: 0px !important;
+    opacity: 0;
+}
+
+.bg-linear-card-dash1{
+    background-image: linear-gradient(to bottom left, #ff8d72, #ff6491, #ff8d72);
+    padding: 5px;
+    border-radius: 50%;
+    aspect-ratio: 4.1;
+    text-align: center;
+}
+.leftCardDash{
+    flex: 0 0 50%;
+}
+.rightCardDash{
+    flex: 0 0 50%;
+}
+.rightCardDash-title{
+    color: #ffffff8c;
+    font-size: .8rem;
+}
+.rightCardDash-subtitle{
+    color: white;
+}
+.bottomCardDash{
+    flex: 0 0 100%;
+    border-top: 1px solid #ffffff3b;
+    display: block !important;
+    padding-top: 4px;
+    color: #ffffff91;
+}
+
+#table-tbody .avatar img {
+    width: 30px;
+}
+.table-user #table-tbody tr td.avatar {
+    text-align: center;
+}
+#table-tbody tr:last-child, #tbody-tasks tr:last-child{
+    border-bottom: 0px;
+}
+.effect-menu{
+    background-color: #DD3D24;
+    padding: 1.3rem .8rem;
+    position: fixed;
+    left: 28px;
+    height: 100vh !important;
+    border-radius: .3rem;
+}
+.scrollBtnMenu{
+    left: 3.5%;
+}
+.pencil-white2-hover:hover, .btnWhite2:hover div i{
+    color: #FFF;
+}
+.larger-checkbox{
+    top: 0.8rem;
+    scale: 1.4;
+    margin-right: 0.5rem;
+    cursor: pointer;
+}
+.larger-checkbox:checked {
+    background-color: red !important; 
+    border-color: red !important; 
+}
+
+/*
+    Login Style
+*/
+.content-login{
+    background-image: radial-gradient(#09314B,#083451);
+    display: flex;
+    justify-content: center;
     align-items: center;
-    margin-top: 1rem;
+    min-height: 100vh;
+    height: 100%;
 }
-
-.btnLogout, .btnCreateU, .btnAddU{
-    background-color: #e91e63;
-    color: #FFF;
-    padding: .5rem 1.5rem;
-    font-size: 1rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    transition: .3s all ease;
-}
-.btnLogout:hover{
-    background-color: #ef3f7b;
-}
-
-.btnCreateU{
-    background-color: #009688;
-    text-decoration: none;
-}
-.btnCreateU:hover{
-    background-color: #0dc5b4;
-}
-
-.upVet{
-    padding: .3rem 1rem;
-    background: #00b90f;
-    color: #FFF;
-    cursor: pointer;
-}
-
-.content{
-    margin-top: 2rem;
-}
-
-.field_container{
+.container-login{
+    background-color: #FFF;
     display: flex;
     flex-direction: column;
+    max-width: 370px;
+    width: 100% !important;
+    margin: 0 3rem;
+    border-radius: 10px;
+}
+.container-login h1{
+    font-size: 4rem;
+    line-height: 4rem;
 }
 
-.field_input{
-    background-color: #ebebeb;
-    border: 2px solid #CCC;
-    color: #000;
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    padding-bottom: 2rem;
+}
+
+.loginForm .field i {
+    height:  100%;
+    padding-left: .6rem;
     font-size: 1.2rem;
+}
+.loginForm .field input{
     outline: none;
-    padding: .2rem .3rem;
-    border-radius: .5rem;
-    margin-bottom: 1rem;
+    padding: .4rem;
+    padding-left: 2.5rem;
+    border-radius: 10px;
+    border: 1px solid #DDD;
+    font-size: .95rem;
+    transition: .3s all ease-in-out;
+}
+.loginForm .field input:focus{
+    border: 1px solid #09314B;
 }
 
-.field_label{
-    margin-bottom: .5rem;
+.loginForm .btnSubmitLogin{
+    background-image: radial-gradient(#09314B,#083451);
+    color: white;
+    padding: .6rem 0;
     font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: .1s all ease-in-out;
 }
 
-.btnAddU{
-    background-color: #8bc34a;
-    width: 100%;
-}
-.btnAddU:hover{
-    background-color: #a6e75b;
+.loginForm .btnSubmitLogin:hover{
+    box-shadow: 0px 4px 3px #ccc;
+    transform: scale(1.01);
 }

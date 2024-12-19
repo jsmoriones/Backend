@@ -13,7 +13,6 @@ class CuentaBancaria {
   }
 
   getTitular(){
-    return this.titular;
   }
   setTitular(valor){
     this.titular = valor;

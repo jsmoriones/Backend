@@ -3,9 +3,13 @@ USE connectReact;
 
 CREATE TABLE roles(
 	rid INT AUTO_INCREMENT,
-    nombre VARCHAR(50) NOT NULL UNIQUE,
-    PRIMARY KEY(rid)
+  nombre VARCHAR(50) NOT NULL UNIQUE,
+  PRIMARY KEY(rid)
 );
+
+INSERT INTO roles(nombre) VALUES("administrador");
+INSERT INTO roles(nombre) VALUES("veterinario");
+INSERT INTO roles(nombre) VALUES("usuario");
 
 CREATE TABLE users(
 	uid INT AUTO_INCREMENT,
@@ -16,6 +20,10 @@ CREATE TABLE users(
     PRIMARY KEY (uid),
     FOREIGN KEY (roleId) REFERENCES roles(rid)
 );
+
+ALTER TABLE users ADD COLUMN ocupacion VARCHAR(50) NOT NULL;
+ALTER TABLE users ADD COLUMN salario INT NOT NULL;
+ALTER TABLE users ADD COLUMN puntaje INT(20) NOT NULL;
 
 CREATE TABLE animal(
 	pid INT AUTO_INCREMENT,
