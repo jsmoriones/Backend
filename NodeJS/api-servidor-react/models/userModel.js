@@ -16,6 +16,11 @@ class User {
         let [allUsers] = await db.query("SELECT * FROM users");
         return allUsers;
     }
+    static async usersForTask() {
+        //extraemos el primer objeto que trae el result del query select *
+        let [allUsers] = await db.query("SELECT uid, username FROM users");
+        return allUsers;
+    }
     static async findOneByUid(uid) {
         let [user] = await db.query("SELECT * FROM users WHERE uid = ?", [uid]);
         return user;

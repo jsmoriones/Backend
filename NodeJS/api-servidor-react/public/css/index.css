@@ -7,6 +7,11 @@
     margin: 0;
     box-sizing: border-box;
 }
+html, body{
+    font-family: "Poppins", serif;
+    font-weight: 400;
+    font-style: normal;
+}
 .white2{color: #cccccc;}
 .color1{color: #09314B;}
 .color2{color: #DD3D24;}
@@ -14,7 +19,10 @@
 .color4{color:#1d8cf8;}
 .color5{color:#00f2c3;}
 .color6{color:#fd5d93;}
+.dfdfdf{color: #dfdfdf;}
+.ededed{color:#ededed;}
 .fs-7{font-size: .8rem;}
+.fs-xs{font-size: .9rem;}
 .border-bottom-table{border-bottom: 1px solid #cccccc47;}
 
 /*
@@ -43,7 +51,38 @@
     color: #DD3D24;
     background-color: #f2f2f2;
 }
+.reflector1, .reflector2, .reflector3, .reflector4{
+    width: 300px;
+    background-image: linear-gradient(to right, #dd3d24a3, transparent);
+    transform: rotate(29deg) translate(-10px, 42px);
+    height: 90px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
+.reflector2{
+    right: -45px;
+    transform: rotate(150deg) translate(-27%, -114%);
+}
+
+.reflector3{
+    transform: rotate(155deg) translate(14%, 50%);
+    left: 0;
+}
+
+.reflector4{
+    transform: rotate(167deg) translate(-30%, -19%);
+    right: 0;
+}
+.avatar{
+    margin-top: 2rem;
+}
+.avatar .img-avatar{
+    max-width: 130px;
+    width: 100%;
+    border: 5px solid #22465d9c;
+}
 /*
     Admin Styles
 */
@@ -154,6 +193,22 @@
     background-color: red !important; 
     border-color: red !important; 
 }
+.editProfile input{
+    border: 1px solid #126296;
+}
+.editProfile input::placeholder, .editProfile textarea::placeholder{ color: #ccc; }
+.editProfile input:focus{
+    border: 1px solid #dd3d24;
+}
+.editProfile textarea{
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid #126296;
+    resize: none;
+}
+.editProfile textarea:focus{
+    border-bottom: 1px solid #dd3d24;
+}
 
 /*
     Login Style
@@ -205,7 +260,7 @@
     border: 1px solid #09314B;
 }
 
-.loginForm .btnSubmitLogin{
+.loginForm .btnSubmitLogin, .editProfile .btnEditInfo, #form-task .btnTaskSave{
     background-image: radial-gradient(#09314B,#083451);
     color: white;
     padding: .6rem 0;
@@ -215,7 +270,29 @@
     transition: .1s all ease-in-out;
 }
 
+.editProfile .btnEditInfo, #form-task .btnTaskSave{
+    background-color: #DD3D24;
+    padding: .5rem 0;
+    font-size: 1rem;
+}
+.editProfile .btnEditInfo:hover, #form-task .btnTaskSave:hover{
+    transform: translateY(-1px);
+}
+
 .loginForm .btnSubmitLogin:hover{
     box-shadow: 0px 4px 3px #ccc;
     transform: scale(1.01);
+}
+
+/*
+    Avatar Styles
+*/
+.avatar-task{
+    width: 60px;
+}
+.iconChecklist{transform: translate(6px, 56%);font-size: 1.1rem;}
+.viewTaskLink{transition: .1s all ease;}
+.viewTaskLink:hover{
+    color: #FFF !important;
+    background-color: #dc3545;
 }

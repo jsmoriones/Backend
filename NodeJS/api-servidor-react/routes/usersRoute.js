@@ -1,10 +1,11 @@
 import usersController from "../controllers/usersController.js";
-const { getAll, login, register, getUserWithUid, profile, updateRoleUser, updateInfoUser, deleteUser } = usersController
+const { getAll, usersForTask, login, register, getUserWithUid, profile, updateRoleUser, updateInfoUser, deleteUser } = usersController
 import { Router } from "express";
 import { verifyToken, verifyAdmin } from "../middlewares/jwt.middleware.js";
 const route = Router();
 
 route.get("/users", getAll)
+route.get("/users-tasks", usersForTask)
 route.post("/register", register)
 route.post("/login", login)
 route.get("/user/:id", getUserWithUid)

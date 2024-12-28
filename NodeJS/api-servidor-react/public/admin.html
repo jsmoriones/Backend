@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrator Panel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/index.css">
@@ -48,30 +51,30 @@
     <section class="Principal-contenedor container-fluid mx-auto row justify-content-md-center overflow-y-hidden">
         <div class="Menu-dashboard">
             <div class="d-flex flex-column align-items-center gap-4 overflow-hidden effect-menu">
-                <button type="button" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile">
+                <a href="/admin" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Home">
+                    <i class="bi bi-house-fill lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Home</p>
+                </a>
+                <a href="/profile" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile">
                     <i class="bi bi-person-fill lh-1 fs-4 p-1 text-white"></i>
                     <p class="position-absolute text-white">Profile</p>
-                </button>
-                <button class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
-                    <i class="bi bi-android lh-1 fs-4 p-1 text-white"></i>
-                    <p class="position-absolute text-white">item !!!!</p>
-                </button>
-                <button class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
-                    <i class="bi bi-apple lh-1 fs-4 p-1 text-white"></i>
-                    <p class="position-absolute text-white">item !!!!</p>
-                </button>
-                <button class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                </a>
+                <a href="/tasks" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Tasks">
+                    <i class="bi bi-list-task lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Tasks</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
                     <i class="bi bi-backpack lh-1 fs-4 p-1 text-white"></i>
                     <p class="position-absolute text-white">item !!!!</p>
-                </button>
-                <button class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
                     <i class="bi bi-bell lh-1 fs-4 p-1 text-white"></i>
                     <p class="position-absolute text-white">item !!!!</p>
-                </button>
-                <button class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
                     <i class="bi bi-bicycle lh-1 fs-4 p-1 text-white"></i>
                     <p class="position-absolute text-white">item !!!!</p>
-                </button>
+                </a>
             </div>
         </div>
         <div class="Content-dashboard">

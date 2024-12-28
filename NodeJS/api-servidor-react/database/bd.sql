@@ -46,3 +46,16 @@ CREATE TABLE reservations(
     FOREIGN KEY (pet) REFERENCES animal(pid),
     FOREIGN KEY (veterinario) REFERENCES users(uid)
 );
+
+CREATE TABLE tasks(
+  tid INT AUTO_INCREMENT,
+  title VARCHAR(180) NOT NULL,
+  taskDead DATE NOT NULL,
+  userAssign INT NOT NULL,
+  priority INT(3) NOT NULL,
+  PRIMARY KEY (tid),
+  FOREIGN KEY (userAssign) REFERENCES users(uid)
+);
+
+ALTER TABLE tasks ADD COLUMN status boolean DEFAULT false;
+ALTER TABLE tasks ADD COLUMN createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP;

@@ -16,6 +16,18 @@ class Users {
             })
         }
     }
+    static async usersForTask(req, res){
+        try {
+            const users = await UserModel.usersForTask();
+            return res.json({ok: true, msg: users});
+        } catch (error) {
+            console.log(error)
+            return res.status(500).json({
+                ok: false,
+                msg: "Error Server"
+            })
+        }
+    }
 
     static async register(req, res){
         try {

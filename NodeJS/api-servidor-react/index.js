@@ -7,6 +7,7 @@ const PORT = process.env.PORT;
 
 import publicRouter from "./routes/publicRouter.js";
 import usersRoute from "./routes/usersRoute.js";
+import taskRoute from "./routes/taskRoute.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use( express.static("public") );
 
 app.use( "/", publicRouter );
 app.use( "/api", usersRoute );
+app.use( "/api", taskRoute );
 
 
 

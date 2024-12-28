@@ -22,4 +22,8 @@ router.get("/admin/crear-usuario", (req, res) => {
     res.sendFile(publicpath + "/adminRegister.html")
 })
 
+router.get("/tasks", (req, res) => {
+    res.sendFile(publicpath + "/tasks.html")
+})
+
 export default router;

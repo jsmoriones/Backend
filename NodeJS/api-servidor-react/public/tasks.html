@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tasks</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="bg-primary-custom position-relative">
+    <div class="border-top-body position-fixed top-0 w-100"></div>
+    <header class="Header container-fluid mx-auto">
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <div class="d-flex align-items-center justify-content-center gap-4">
+                <button class="bg-transparent" id="btnDropdownMenuDashboard">
+                    <i class="bi bi-list-ul text-white fs-3"></i>
+                </button>
+                <button class="bg-transparent d-none position-fixed scrollBtnMenu btnMenuDashboardScroll" id="btnDropdownMenuDashboard">
+                    <i class="bi bi-list-ul color2 fs-3"></i>
+                </button>
+                <h3 class="text-uppercase fs-6 fw-normal text-white lh-1 mb-0">Dashboard</h3>
+            </div>
+            <div class="settings d-flex align-items-start">
+                <div class="d-flex align-items-center">
+                    <a class="bg-transparent mx-5 lh-1 pe-auto">
+                        <i class="bi bi-search text-white fs-5"></i>
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <button class="d-flex align-items-center gap-2 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/img/mike.jpg" class="avatar-dash rounded-circle" />
+                        <i class="bi bi-caret-down-fill text-white fs-custom-arrow"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#">Profile</a></li>
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#">Setting</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#" id="logoutBtn">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="Principal-contenedor container-fluid mx-auto row justify-content-md-center overflow-y-hidden">
+        <div class="Menu-dashboard">
+            <div class="d-flex flex-column align-items-center gap-4 overflow-hidden effect-menu">
+                <a href="/admin" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Home">
+                    <i class="bi bi-house-fill lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Home</p>
+                </a>
+                <a href="/profile" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile">
+                    <i class="bi bi-person-fill lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Profile</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-apple lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-backpack lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-bell lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-bicycle lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+            </div>
+        </div>
+        <div class="Content-dashboard">
+            <div class="container">
+                <div class="row">
+                    <div class="pb-3 rounded-2 d-flex justify-content-end">
+                        <button type="button" class="px-3 py-1 rounded-5" data-bs-toggle="modal" data-bs-target="#addTask">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            Create a new task!
+                        </button>
+                    </div>
+                </div>
+                <div class="row" id="message">
+                    <!-- Aqui se imprimen los mensajes del servidor -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="row gap-3 align-items-start">
+                    <div class="col bg-op-cards rounded-2 p-2" id="tasks-container">
+                    </div>
+                    <div class="col-md-4 bg-op-cards rounded-2 py-2">
+                        <div class="input-group mb-3">
+                            <p class="d-block w-100 lead text-white fs-5">Buscar:</p>
+                            <span class="input-group-text" id="basic-addon1">
+                                <i class="bi bi-search fs-5"></i>
+                            </span>
+                            <input type="text" id="searchTask" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                        </div>
+                        <p class="lead text-white fs-5">Filtro:</p>
+                        <form action="#" id="taskFilterFrom" class="d-flex flex-column gap-2">
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="status-task" id="ninguna" value="">
+                              <label class="form-check-label text-white" for="ninguna">
+                                Ninguna
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="status-task" id="high" value="1">
+                              <label class="form-check-label text-white" for="high">
+                                High
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="status-task" id="medium" value="2">
+                              <label class="form-check-label text-white" for="medium">
+                                Medium
+                              </label>
+                            </div>
+                            <div class="form-check">
+                              <input class="form-check-input" type="radio" name="status-task" id="low" value="3">
+                              <label class="form-check-label text-white" for="low">
+                                Low
+                              </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTask" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="#" id="form-task">
+                    <div class="mb-3">
+                        <label for="taskName" class="form-label mb-1">Task Name</label>
+                        <div class="position-relative">
+                            <i class="bi bi-list-check position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                            <input type="text" name="taskName" class="form-control focus-ring focus-ring-danger border-danger ps-4 rounded-4" id="taskName" placeholder="Ejemplo de tarea">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="priorityLevel" class="form-label mb-1">Priority Level</label>
+                        <div class="position-relative">
+                            <i class="bi bi-stack position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                            <select id="priorityLevel" name="priorityLevel" class="form-select focus-ring focus-ring-danger border-danger ps-4" aria-label="Default select example">
+                                <option selected>Seleccione el nivel de la tarea</option>
+                                <option value="1">Hight</option>
+                                <option value="2">Medium</option>
+                                <option value="3">Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="assign" class="form-label mb-1">Asignar a</label>
+                        <div class="position-relative">
+                            <i class="bi bi-person-circle position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                            <select id="assign" name="assign" class="form-select focus-ring focus-ring-danger border-danger ps-4" aria-label="Default select example">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskDead" class="form-label mb-1">Task Deadline</label>
+                        <div class="position-relative">
+                            <i class="bi bi-list-check position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                            <input type="date" name="taskDead" class="form-control focus-ring focus-ring-danger border-danger ps-4 rounded-4" id="taskDead" placeholder="Ejemplo de tarea">
+                        </div>
+                    </div>
+                    <button type="submit" class="btnTaskSave px-5 w-100 rounded-4">Save new Task</button>
+                </form>
+              </div>
+              <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+            </div>
+          </div>
+        </div>
+    </section>
+</body>
+    <script src="/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="/js/axios.min.js"></script>
+    <script src="/js/helpers/index.js"></script>
+    <!-- <script src="/js/profile/index.js"></script> -->
+    <script>
+        //verificacion de logueo
+        if(localStorage.getItem("token") == null){
+            window.location.href = "/login"
+        }
+
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        const tasksContainer = document.querySelector("#tasks-container");
+
+        //consultas a la API
+        const formTasks = document.querySelector("#form-task");
+        const token = localStorage.getItem("token");
+        const message = document.querySelector("#message");
+        const selectUser = document.querySelector("#assign");
+        const addTask = document.querySelector('#addTask');
+        const searchTask = document.querySelector("#searchTask");
+        const modal = new bootstrap.Modal(addTask, {
+            backdrop: 'static'
+        });
+
+        //Insercion de tarea en la base de datos
+        formTasks.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const infoTask = {
+                title: e.target.taskName.value,
+                taskDead: e.target.taskDead.value,
+                userAssign: parseInt(e.target.assign.value),
+                priority: parseInt(e.target.priorityLevel.value)
+            };
+
+            if(
+                !infoTask.title ||
+                !infoTask.taskDead ||
+                !infoTask.userAssign ||
+                !infoTask.priority
+            ){
+                alert("Es incorrecto, deben estar los campos llenos")
+                return;
+            }
+
+            message.innerHTML = "";
+            try{
+                const {data} = await axios.post("/api/task", infoTask, {
+                    headers: {
+                        //por headers pasamos el token por authorization
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+                message.innerHTML = `<div class="bg-success d-flex justify-content-center align-items-center py-2 mb-3">
+                        <p class="text-white fs-5 fw-light text-center m-0">¡Se creo correctamente la tarea!</p>
+                </div>`;
+                getAllTasks();
+                formTasks.reset()
+                modal.hide();
+            } catch(error) {
+              console.log(error);
+              message.innerHTML = `<div class="bg-danger d-flex justify-content-center align-items-center py-2 mb-3">
+                        <p class="text-white fs-5 fw-light text-center m-0">¡Hubo un error en la insercion de la tarea, contacta al administrador!</p>
+                </div>`;
+            }finally{
+                setTimeout(function(){
+                    message.innerHTML = "";
+                }, 6000);
+            }
+        });
+
+        var arregloDeTasks = [];
+        //Consulta de las tareas en la base datos
+        const getAllTasks = async () => {
+            tasksContainer.innerHTML = "";
+            try{
+              const {data} = await axios.get("/api/task", {
+                    headers: {
+                        //por headers pasamos el token por authorization
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+              console.log(data.msg)
+              arregloDeTasks = data.msg;
+              data.msg.forEach(task => {
+                tasksContainer.innerHTML += `
+                    <div class="bg-white rounded-4 px-3 py-2 mb-3">
+                        <div class="row">
+                            <div class="col">
+                                <div class="row gap-2 mb-3">
+                                    <div class="col-auto">
+                                        <img src="/img/mike.jpg" class="avatar-task rounded-circle ">
+                                    </div>
+                                    <div class="col d-flex flex-column justify-content-between py-1">
+                                        <p class="h5 mb-0 fw-bold">${task.title}</p>
+                                        <p class="lead m-0 fs-6 text-body-tertiary">Creado el ${convertDate(task.createdAt)}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col d-flex gap-3">
+                                        <p class="m-0">
+                                            <i class="bi bi-stack"></i>
+                                            <span class="fw-semibold">${convertPriority(task.priority)}</span>
+                                        </p>
+                                        <p class="m-0">
+                                            <i class="bi bi-clock-fill text-danger"></i>
+                                            <span class="fw-semibold text-danger">${convertDate(task.taskDead)}</span>
+                                        </p>
+                                        <p class="m-0">
+                                            <i class="bi bi-flag-fill"></i>
+                                            <span class="fw-semibold">${task.status ? "Completed" : "In Progress"}</span>
+                                        </p>
+                                        <p class="m-0">
+                                            <i class="bi bi-person-circle"></i>
+                                            <span class="fw-semibold">${task.username}</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2 d-flex align-items-center justify-content-end">
+                                <a href="#" class="viewTaskLink rounded-5 border text-decoration-none text-danger py-2 px-4 border-danger d-block fw-semibold">
+                                    View
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `
+              })
+            } catch(error) {
+              console.log(error);
+              if(error.status === 400){
+                localStorage.removeItem("token");
+                window.href.location = "/login"
+              }
+            }
+        }
+
+        getAllTasks();
+
+        //obtener todos los usuarios para crear un task
+        const getUsers = async () => {
+            selectUser.innerHTML = "";
+            try{
+              const {data} = await axios.get("/api/users-tasks");
+
+              selectUser.innerHTML = "<option selected>Selecciona el usuario</option>";
+              data.msg.forEach(user => {
+                selectUser.innerHTML += `
+                    <option value="${user.uid}">${user.username}</option>
+                `;
+              });
+            } catch(error) {
+              console.log(error);
+              if(error.status === 400){
+                localStorage.removeItem("token");
+                window.href.location = "/login"
+              }
+            }
+        }
+        getUsers()
+
+        //busqueda de tareas por medio del input search
+        searchTask.addEventListener("input", (e) => {
+            tasksContainer.innerHTML = "";
+
+            let nuevaBusqueda = buscarTareas(e.target.value, arregloDeTasks)
+            if(!e.target.value){
+                getAllTasks();
+            }else{
+                nuevaBusqueda.forEach(task => {
+                    tasksContainer.innerHTML += `
+                        <div class="bg-white rounded-4 px-3 py-2 mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row gap-2 mb-3">
+                                        <div class="col-auto">
+                                            <img src="/img/mike.jpg" class="avatar-task rounded-circle ">
+                                        </div>
+                                        <div class="col d-flex flex-column justify-content-between py-1">
+                                            <p class="h5 mb-0 fw-bold">${task.title}</p>
+                                            <p class="lead m-0 fs-6 text-body-tertiary">Creado el ${convertDate(task.createdAt)}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex gap-3">
+                                            <p class="m-0">
+                                                <i class="bi bi-stack"></i>
+                                                <span class="fw-semibold">${convertPriority(task.priority)}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-clock-fill text-danger"></i>
+                                                <span class="fw-semibold text-danger">${convertDate(task.taskDead)}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-flag-fill"></i>
+                                                <span class="fw-semibold">${task.status ? "Completed" : "In Progress"}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-person-circle"></i>
+                                                <span class="fw-semibold">${task.username}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-end">
+                                    <a href="#" class="viewTaskLink rounded-5 border text-decoration-none text-danger py-2 px-4 border-danger d-block fw-semibold">
+                                        View
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                  })
+            }
+        })
+
+        //Filtro por radio button para tareas
+        const inputAllRAdioBFilterTask = document.querySelectorAll('input[name="status-task"]');
+        inputAllRAdioBFilterTask.forEach(input => {
+            input.addEventListener("change", (e) => {
+                tasksContainer.innerHTML = "";
+                //console.log(e.target)
+                if(!e.target.value){
+                    getAllTasks();
+                }else{
+                    let nuevaBusqueda = buscarPorPriodidad(e.target.value, arregloDeTasks);
+
+                    nuevaBusqueda.forEach(task => {
+                    tasksContainer.innerHTML += `
+                        <div class="bg-white rounded-4 px-3 py-2 mb-3">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row gap-2 mb-3">
+                                        <div class="col-auto">
+                                            <img src="/img/mike.jpg" class="avatar-task rounded-circle ">
+                                        </div>
+                                        <div class="col d-flex flex-column justify-content-between py-1">
+                                            <p class="h5 mb-0 fw-bold">${task.title}</p>
+                                            <p class="lead m-0 fs-6 text-body-tertiary">Creado el ${convertDate(task.createdAt)}</p>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col d-flex gap-3">
+                                            <p class="m-0">
+                                                <i class="bi bi-stack"></i>
+                                                <span class="fw-semibold">${convertPriority(task.priority)}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-clock-fill text-danger"></i>
+                                                <span class="fw-semibold text-danger">${convertDate(task.taskDead)}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-flag-fill"></i>
+                                                <span class="fw-semibold">${task.status ? "Completed" : "In Progress"}</span>
+                                            </p>
+                                            <p class="m-0">
+                                                <i class="bi bi-person-circle"></i>
+                                                <span class="fw-semibold">${task.username}</span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-2 d-flex align-items-center justify-content-end">
+                                    <a href="#" class="viewTaskLink rounded-5 border text-decoration-none text-danger py-2 px-4 border-danger d-block fw-semibold">
+                                        View
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                  })
+                }
+            })
+        })
+    </script>
+</html>
