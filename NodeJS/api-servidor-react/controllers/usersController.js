@@ -55,7 +55,7 @@ class Users {
             const newUser = await create({email, password: hashedPassword, username});
             console.log(newUser)
 
-            const token = jwt.sign({email: newUser.email, username: newUser.username}, process.env.JWT_SECRET, { expiresIn: "1h" });
+            const token = jwt.sign({email: newUser.email, username: newUser.username}, process.env.JWT_SECRET, { expiresIn: "5h" });
 
 
             return res.status(201).json({

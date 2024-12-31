@@ -28,13 +28,28 @@ const convertPriority = (value) => {
 function buscarTareas(textoABuscar, arregloDeBusqueda) {
   const textoMinuscula = textoABuscar.toLowerCase();
   const regex = new RegExp(textoMinuscula, 'i'); // Búsqueda insensible a mayúsculas y minúsculas
-
+  console.log( arregloDeBusqueda )
   const resultados = arregloDeBusqueda.filter(tarea => regex.test(tarea.title.toLowerCase()));
+
+  return resultados;
+}
+
+function buscarAnimal(textoABuscar, arregloDeBusqueda) {
+  const textoMinuscula = textoABuscar.toLowerCase();
+  const regex = new RegExp(textoMinuscula, 'i'); // Búsqueda insensible a mayúsculas y minúsculas
+  console.log( arregloDeBusqueda )
+  const resultados = arregloDeBusqueda.filter(tarea => regex.test(tarea.nombre.toLowerCase()));
 
   return resultados;
 }
 
 function buscarPorPriodidad(prioridad, arreglo){
   const resultado = arreglo.filter(tarea => tarea.priority === parseInt(prioridad));
+  return resultado;
+}
+
+function buscarPorSpecie(specie, arreglo){
+  console.log(specie, arreglo);
+  const resultado = arreglo.filter(tarea => tarea.specie === specie);
   return resultado;
 }

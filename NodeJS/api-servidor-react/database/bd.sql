@@ -28,12 +28,33 @@ ALTER TABLE users ADD COLUMN puntaje INT(20) NOT NULL;
 CREATE TABLE animal(
 	pid INT AUTO_INCREMENT,
 	nombre VARCHAR(60) NOT NULL,
-    species VARCHAR(60) NOT NULL,
+    species INT NOT NULL,
     breed VARCHAR(60) NOT NULL,
     owner INT NOT NULL,
     PRIMARY KEY(pid),
-    FOREIGN KEY (owner) REFERENCES users(uid)
+    FOREIGN KEY (owner) REFERENCES users(uid),
+    FOREIGN KEY (species) REFERENCES specie(eid)
 );
+ALTER TABLE animal ADD COLUMN description VARCHAR(200);
+ALTER TABLE animal ADD COLUMN foto VARCHAR(40);
+ALTER TABLE animal ADD COLUMN nacimiento DATE;
+ALTER TABLE animal DROP COLUMN breed;
+
+ALTER TABLE animal MODIFY species INT;
+
+ALTER TABLE animal ADD CONSTRAINT FOREIGN KEY (species) REFERENCES specie(eid);
+
+CREATE TABLE specie(
+  eid INT AUTO_INCREMENT,
+  nombre VARCHAR(35) NOT NULL,
+  PRIMARY KEY (eid)
+);
+
+INSERT INTO specie(nombre) VALUES("Caninos");
+INSERT INTO specie(nombre) VALUES("Felinos");
+INSERT INTO specie(nombre) VALUES("Roedores");
+INSERT INTO specie(nombre) VALUES("Acuaticos");
+INSERT INTO specie(nombre) VALUES("Aves");
 
 
 CREATE TABLE reservations(

@@ -1,4 +1,0 @@
-{
-    "watch": ["./public/**/*", "views/**/*"],
-    "ext": "js,json,css,html"
-}

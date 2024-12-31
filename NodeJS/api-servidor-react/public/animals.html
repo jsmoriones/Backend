@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animals</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/index.css">
+</head>
+<body class="bg-primary-custom position-relative">
+    <div class="border-top-body position-fixed top-0 w-100"></div>
+    <header class="Header container-fluid mx-auto">
+        <div class="d-flex justify-content-between align-items-center py-3">
+            <div class="d-flex align-items-center justify-content-center gap-4">
+                <button class="bg-transparent" id="btnDropdownMenuDashboard">
+                    <i class="bi bi-list-ul text-white fs-3"></i>
+                </button>
+                <button class="bg-transparent d-none position-fixed scrollBtnMenu btnMenuDashboardScroll" id="btnDropdownMenuDashboard">
+                    <i class="bi bi-list-ul color2 fs-3"></i>
+                </button>
+                <h3 class="text-uppercase fs-6 fw-normal text-white lh-1 mb-0">Dashboard</h3>
+            </div>
+            <div class="settings d-flex align-items-start">
+                <div class="d-flex align-items-center">
+                    <a class="bg-transparent mx-5 lh-1 pe-auto">
+                        <i class="bi bi-search text-white fs-5"></i>
+                    </a>
+                </div>
+                <div class="dropdown">
+                    <button class="d-flex align-items-center gap-2 bg-transparent" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/img/mike.jpg" class="avatar-dash rounded-circle" />
+                        <i class="bi bi-caret-down-fill text-white fs-custom-arrow"></i>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#">Profile</a></li>
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#">Setting</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item drop-user-admin-custom text-uppercase fw-semibold" href="#" id="logoutBtn">Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="Principal-contenedor container-fluid mx-auto row justify-content-md-center overflow-y-hidden">
+        <div class="Menu-dashboard">
+            <div class="d-flex flex-column align-items-center gap-4 overflow-hidden effect-menu">
+                <a href="/admin" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Home">
+                    <i class="bi bi-house-fill lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Home</p>
+                </a>
+                <a href="/profile" class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="Profile">
+                    <i class="bi bi-person-fill lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">Profile</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-apple lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-backpack lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-bell lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+                <a class="bg-transparent rounded-circle btn-menu d-flex gap-3 justify-content-center align-items-center position-relative">
+                    <i class="bi bi-bicycle lh-1 fs-4 p-1 text-white"></i>
+                    <p class="position-absolute text-white">item !!!!</p>
+                </a>
+            </div>
+        </div>
+        <div class="Content-dashboard">
+            <div class="container">
+                <div class="row">
+                    <div class="pb-3 rounded-2 d-flex justify-content-end">
+                        <button type="button" class="px-3 py-1 rounded-5" data-bs-toggle="modal" data-bs-target="#addAnimal">
+                            <i class="bi bi-plus-circle me-2"></i>
+                            Agregar animal
+                        </button>
+                    </div>
+                </div>
+                <div class="row" id="message">
+                    <!-- Aqui se imprimen los mensajes del servidor -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="row gap-3 align-items-start">
+                  <div class="col bg-op-cards rounded-2 p-2 h-100" id="tasks-container">
+                    <div id="contenedor-info-animals" class="row row-cols-1 row-cols-md-3 g-4">
+                      
+                    </div>
+                  </div>
+                  <div class="col-md-4 bg-op-cards rounded-2 py-2">
+                      <div class="input-group mb-3">
+                          <p class="d-block w-100 lead text-white fs-5">Buscar:</p>
+                          <span class="input-group-text border-danger" id="basic-addon1">
+                              <i class="bi bi-search fs-5"></i>
+                          </span>
+                          <input type="text" id="searchAnimal" class="form-control focus-ring focus-ring-danger border-danger" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1">
+                      </div>
+                      <p class="lead text-white fs-5">Filtro:</p>
+                      <form action="#" id="animalFilterFrom" class="d-flex flex-column gap-2">
+                        <div class="form-check">
+                          <input class="form-check-input" type="radio" name="specie-animal" id="ninguno" value="">
+                          <label class="form-check-label text-white" for="ninguno">
+                          Ninguno
+                          </label>
+                        </div>
+                      </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Form Add Animal -->
+        <div class="modal fade" id="addAnimal" tabindex="-1" aria-labelledby="addAnimal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Agregar un Nuevo Animal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="#" id="form-animals" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <label for="name" class="form-label mb-1">Nombre de animal</label>
+                    <input type="text" name="name" class="form-control focus-ring focus-ring-danger border-danger ps-2 rounded-4" id="name" placeholder="Pepe">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea class="form-control focus-ring focus-ring-danger border-danger rounded-3" id="description" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="grupo" class="form-label mb-1">Grupo</label>
+                    <select id="grupo" name="grupo" class="form-select focus-ring focus-ring-danger border-danger" aria-label="Default select example">
+                      
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="file" class="form-label">Foto de tu animal</label>
+                    <input type="file" name="file" class="form-control form-control-sm border-danger focus-ring focus-ring-danger border-danger" id="file">
+                  </div>
+                  <div class="mb-3">
+                    <label for="nacimiento" class="form-label mb-1">Fecha de Nacimiento</label>
+                    <div class="position-relative">
+                      <i class="bi bi-calendar position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                      <input type="date" name="nacimiento" class="form-control focus-ring focus-ring-danger border-danger pe3-5 rounded-4" id="nacimiento">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="propietario" class="form-label mb-1">Propietario</label>
+                    <select id="propietario" name="propietario" class="form-select focus-ring focus-ring-danger border-danger" aria-label="Default select example">
+                      <option selected>Seleccionar</option>
+                      <option value="1">Usuario 1</option>
+                      <option value="2">Usuario 2</option>
+                      <option value="3">Usuario 3</option>
+                      <option value="4">Usuario 4</option>
+                      <option value="5">Usuario 5</option>
+                    </select>
+                  </div>
+                  <button type="submit" class="btnAnimalSave px-5 w-100 rounded-4">Guardar animalito</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Form Edit Animal -->
+        <div class="modal fade" id="editAnimInfo" tabindex="-1" aria-labelledby="editAnimInfo" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Editar Información del Animal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form action="#" id="edit-form-animals" enctype="multipart/form-data">
+                  <div class="mb-3">
+                    <label for="name" class="form-label mb-1">Nombre de animal</label>
+                    <input type="text" name="name" class="form-control focus-ring focus-ring-danger border-danger ps-2 rounded-4" id="name" placeholder="Pepe">
+                  </div>
+                  <div class="mb-3">
+                    <label for="description" class="form-label">Descripción</label>
+                    <textarea class="form-control focus-ring focus-ring-danger border-danger rounded-3" id="description" rows="3"></textarea>
+                  </div>
+                  <div class="mb-3">
+                    <label for="grupo" class="form-label mb-1">Grupo</label>
+                    <select id="grupo" name="grupo" class="form-select focus-ring focus-ring-danger border-danger" aria-label="Default select example">
+                      
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="file" class="form-label">Foto de tu animal</label>
+                    <div class="d-block mb-2">
+                      <img src="" id="fileImage" alt="Imagen de animal" width="150">
+                    </div>
+                    <input type="file" name="file" class="form-control form-control-sm border-danger focus-ring focus-ring-danger border-danger" id="file">
+                    <input type="hidden" name="old_image" id="old_image" />
+                  </div>
+                  <div class="mb-3">
+                    <label for="nacimiento" class="form-label mb-1">Fecha de Nacimiento</label>
+                    <div class="position-relative">
+                      <i class="bi bi-calendar position-absolute top-0 text-black lh-1 iconChecklist"></i>
+                      <input type="date" name="nacimiento" class="form-control focus-ring focus-ring-danger border-danger pe3-5 rounded-4" id="nacimiento">
+                    </div>
+                  </div>
+                  <div class="mb-3">
+                    <label for="propietario" class="form-label mb-1">Propietario</label>
+                    <input type="text" id="propietario" class="form-control focus-ring focus-ring-danger border-danger rounded-4" disabled />
+                  </div>
+                  <button type="submit" class="btnAnimalSave px-5 w-100 rounded-4">Guardar animalito</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal de detalles de cada animal -->
+        <div class="modal fade" id="detailsAnimal" tabindex="-1" aria-labelledby="detailsAnimal" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Detalle de Animal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body" id="bodyModalDetailsAnimal">
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</body>
+  <script src="/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="/js/axios.min.js"></script>
+  <script src="/js/helpers/index.js"></script>
+  <script>
+    const token = localStorage.getItem("token");
+    if(localStorage.getItem("token") == null){
+      window.location.href = "/login"
+    }
+
+    const contenedorInfoAnimals = document.querySelector("#contenedor-info-animals");
+    const formAnimals = document.querySelector("#form-animals");
+    const addAnimal = document.querySelector("#addAnimal");
+    const detailsAnimal = document.querySelector("#detailsAnimal");
+    const editAnimInfo = document.querySelector("#editAnimInfo");
+    const message = document.querySelector("#message");
+    const grupo = document.querySelector("#grupo");
+    const searchAnimal = document.querySelector("#searchAnimal");
+    const animalFilterFrom = document.querySelector("#animalFilterFrom");
+    const modal = new bootstrap.Modal(addAnimal, {
+      backdrop: 'static'
+    });
+    const modalAnimalsDetails = new bootstrap.Modal(detailsAnimal, {
+      backdrop: 'static'
+    });
+    const modalEditInfo = new bootstrap.Modal(editAnimInfo, {
+      backdrop: 'static'
+    });
+
+    //evento que se dispara cuando abre el modal de detalles de animal
+    detailsAnimal.addEventListener("show.bs.modal", async (e) => {
+      //document.querySelector("#bodyModalDetailsAnimal").innerHTML = ``;
+      try{
+        const {data} = await axios(`/api/animal/${parseInt(e.relatedTarget.dataset.animal)}`, {
+          headers: {
+            //por headers pasamos el token por authorization
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+        if(data.ok){
+          const {msg: {animal}} = data;
+          document.querySelector("#bodyModalDetailsAnimal").innerHTML = `
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img src="/img/files/${animal.foto}" class="img-fluid rounded-start h-100 object-fit-cover" alt="...">
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">${animal.nombre}</h5>
+                    <p class="card-text">${animal.description}</p>
+                    <p class="fw-bold mb-0">Especie: <span class="fw-normal">${animal.specie}</span></p>
+                    <p class="fw-bold mb-0">Propietario: <span class="fw-normal">${animal.owner}</span></p>
+                    <p class="fw-bold mb-0">Fecha de Nacimiento: <span class="fw-normal">${convertDate(animal.nacimiento)}</span></p>
+                    <div class="mb-3 d-flex w-100 gap-2">
+                      <a href="#" id="delete-animal" class="d-inline-block linkDelete rounded-2" title="Eliminar" data-idAnimal="${animal.pid}">
+                        <i class="bi bi-trash text-danger fs-5"></i>
+                      </a>
+                      <a href="#" id="edit-animal w-auto" class="d-inline-block linkPencil rounded-2" title="Editar" data-bs-toggle="modal" data-bs-target="#editAnimInfo" data-idAnimal="${animal.pid}">
+                        <i class="bi bi-pencil-square text-success fs-5"></i>
+                      </a>
+                    </div>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+
+          const deleteAnimal = document.querySelector("a#delete-animal");
+          deleteAnimal.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const id = parseInt(e.target.parentElement.dataset.idanimal);
+
+            const {data} = await axios.delete(`/api/animal/${id}`, {
+              headers: {
+                //por headers pasamos el token por authorization
+                Authorization: `Bearer ${token}`
+              }
+            });
+            if(data.msg.result.affectedRows == 1){
+              modalAnimalsDetails.hide();
+              loadAllAnimalsData();
+              message.innerHTML = `<div class="bg-success d-flex justify-content-center align-items-center py-2 mb-3">
+                <p class="text-white fs-5 fw-light text-center m-0">¡Se elimino el animal correctamente!</p>
+              </div>`;
+            }
+          })
+        }
+      } catch(error) {
+        console.log(error);
+        message.innerHTML = `<div class="bg-danger d-flex justify-content-center align-items-center py-2 mb-3">
+          <p class="text-white fs-5 fw-light text-center m-0">¡Hubo un error eliminando el animal</p>
+        </div>`;
+      } finally {
+        setTimeout(function(){
+          message.innerHTML = "";
+        }, 6000);
+      }
+    })
+
+    //evento que se dispara cuando abre el modal de editar animal
+    editAnimInfo.addEventListener("show.bs.modal", async (e) => {
+      const editFormAnimal = document.querySelector("#edit-form-animals");
+      try{
+        const {data} = await axios(`/api/animal/${parseInt(e.relatedTarget.dataset.idanimal)}`, {
+          headers: {
+            //por headers pasamos el token por authorization
+            Authorization: `Bearer ${token}`
+          }
+        });
+
+
+        if(data.ok){
+          //loadSpecies()
+          const {msg: {animal}} = data;
+          editFormAnimal.name.value = animal.nombre;
+          editFormAnimal.description.innerText = animal.description;
+
+          //Peticion para species
+          editFormAnimal.grupo.innerHTML = "";
+          try{
+            const {data} = await axios("/api/animal/species", {
+              headers: {
+                //por headers pasamos el token por authorization
+                Authorization: `Bearer ${token}`
+              }
+            });
+            if(data.ok){
+              const {msg: {species}} = data;
+
+              species.forEach(animalSelect => {
+                //console.log(animal.nombre, animal.specie)
+                  editFormAnimal.grupo.innerHTML += `
+                    <option value="${animalSelect.eid}" ${animalSelect.nombre == animal.specie ? "selected" : null}>${animalSelect.nombre}</option>
+                  `
+              })
+            }
+          }catch(err){
+            console.log(err)
+          }
+          document.querySelector("#fileImage").src = `/img/files/${animal.foto}`;
+          editFormAnimal.old_image.value = animal.foto
+          editFormAnimal.nacimiento.value = new Date(animal.nacimiento).toLocaleDateString("en-CA", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric"
+          });
+          editFormAnimal.propietario.value = animal.owner
+          console.log( animal )
+        }
+      } catch(error) {
+        console.log(error);
+      }
+      let idAnimal = e.relatedTarget.dataset.idanimal;
+      editFormAnimal.addEventListener("submit", async (ev) => {
+        ev.preventDefault()
+        console.log(ev);
+        const infoAnimal = {
+          name: ev.target.name.value,
+          description: ev.target.description.value,
+          grupo: ev.target.grupo.value,
+          nacimiento: ev.target.nacimiento.value,
+          propietario: ev.target.propietario.value,
+          old_image: ev.target.old_image.value,
+          file: ev.target.file.files[0]
+        }
+
+        try{
+          const {data} = await axios.put(`/api/animal/${idAnimal}`, infoAnimal, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              //por headers pasamos el token por authorization
+              Authorization: `Bearer ${token}`
+            }
+          })
+
+          if(data.ok){
+            modalEditInfo.hide();
+            loadAllAnimalsData();
+            message.innerHTML = `<div class="bg-success d-flex justify-content-center align-items-center py-2 mb-3">
+              <p class="text-white fs-5 fw-light text-center m-0">¡Se actualizo la informacion correctamente!</p>
+            </div>`;
+          }
+        } catch(error) {
+          console.log(error);
+          message.innerHTML = `<div class="bg-danger d-flex justify-content-center align-items-center py-2 mb-3">
+            <p class="text-white fs-5 fw-light text-center m-0">¡Hubo un error editando loa informacion</p>
+          </div>`;
+        } finally {
+          setTimeout(function(){
+            message.innerHTML = "";
+          }, 6000);
+        }
+
+      })
+    })
+
+    //Cargando las especies de cada animal
+    async function loadSpecies(){
+      grupo.innerHTML = "";
+      try{
+        const {data} = await axios("/api/animal/species", {
+          headers: {
+            //por headers pasamos el token por authorization
+            Authorization: `Bearer ${token}`
+          }
+        });
+        if(data.ok){
+          const {msg: {species}} = data;
+
+          species.forEach(animal => {
+            animalFilterFrom.innerHTML += `
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="specie-animal" id="${animal.nombre}" value="${animal.nombre}">
+                <label class="form-check-label text-white" for="${animal.nombre}">
+                  ${animal.nombre}
+                </label>
+              </div>
+            `
+          })
+
+          grupo.innerHTML = "<option selected disabled>Grupo de tu animal</option>";
+          species.forEach(animal => {
+            grupo.innerHTML += `
+              <option value="${animal.eid}">${animal.nombre}</option>
+            `
+          })
+
+          //Filtro
+          const inputAllRadioAnimal = document.querySelectorAll('input[name="specie-animal"]');
+
+          inputAllRadioAnimal.forEach(input => {
+            input.addEventListener("change", (e) => {
+              contenedorInfoAnimals.innerHTML = "";
+              if(!e.target.value){
+                loadAllAnimalsData();
+              }else{
+                let nuevaBusqueda = buscarPorSpecie(e.target.value, dataAnimals);
+
+                if(nuevaBusqueda.length == 0){
+                  document.querySelector("#tasks-container").insertAdjacentHTML("beforeend", '<p class="text-center text-white fs-6 mt-4" id="not-data">No hay registros aún :(</p>')
+                }else{
+                  if(document.querySelector("#not-data"))document.querySelector("#not-data").remove();
+                  nuevaBusqueda.forEach(animal => {
+                    contenedorInfoAnimals.innerHTML += `
+                        <div class="col">
+                          <div class="card">
+                            <img class="card-img-top ratio ratio-4x3" src="/img/files/${animal.foto}" alt="Card image cap">
+                            <div class="card-body">
+                              <h5 class="card-title">${animal.nombre.slice(0,20)}</h5>
+                              <p class="card-text">${animal.description.slice(0,50)}...</p>
+                              <p class="card-text">
+                                <a href="#" class="text-muted">
+                                  <i class="bi bi-tag"></i>
+                                  <span>${animal.specie}</span>
+                                </a>
+                              </p>
+                            </div>
+                            <div class="card-footer">
+                              <a href="#" id="linkModalAnimal" class="text-primary" data-bs-toggle="modal" data-bs-target="#detailsAnimal" data-animal="${animal.pid}">Ver más...</a>
+                            </div>
+                          </div>
+                        </div>
+                      `
+                  })
+                }
+
+              }
+            })
+          })
+        }
+      } catch(error) {
+        console.log(error)
+        if(error.status = 400){
+          localStorage.removeItem("token");
+          window.location = "/login";
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      loadSpecies();
+      loadAllAnimalsData();
+    })
+
+    //Agregando un spinner al iniciar la aplicacion
+    document.querySelector("#tasks-container").insertAdjacentHTML("afterbegin", `
+      <div id="spinner" class="d-flex justify-content-center align-items-center w-full">
+        <div class="spinner-border text-light" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    `);
+
+    var dataAnimals = []
+    //Cargando los animales registtados
+    const loadAllAnimalsData = async () => {
+      contenedorInfoAnimals.innerHTML = "";
+      try{
+        const {data} = await axios("/api/animal", {
+          headers: {
+            //por headers pasamos el token por authorization
+            Authorization: `Bearer ${token}`
+          }
+        });
+        console.log(data)
+
+        if(data.ok && data.msg.animals.length == 0){
+          document.querySelector("#tasks-container").innerHTML = `
+            <p class="text-center text-white fs-4" id="notData">No hay registros para mostrar :O</p>
+          `;
+        }
+        if(data.ok){
+          const {msg: {animals}} = data;
+
+          if( animals.length > 0 && document.querySelector("#notData")) document.querySelector("#notData").remove()
+
+          dataAnimals = animals
+          animals.forEach(animal => {
+            contenedorInfoAnimals.innerHTML += `
+              <div class="col">
+                <div class="card">
+                  <img class="card-img-top ratio ratio-4x3" src="/img/files/${animal.foto}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">${animal.nombre.slice(0,20)}</h5>
+                    <p class="card-text">${animal.description.slice(0,50)}...</p>
+                    <p class="card-text">
+                      <a href="#" class="text-muted">
+                        <i class="bi bi-tag"></i>
+                        <span>${animal.specie}</span>
+                      </a>
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" id="linkModalAnimal" class="text-primary" data-bs-toggle="modal" data-bs-target="#detailsAnimal" data-animal="${animal.pid}">Ver más...</a>
+                  </div>
+                </div>
+              </div>
+            `
+          })
+        }
+      } catch(error) {
+        console.log(error)
+        if(error.status = 400){
+          localStorage.removeItem("token");
+          window.location = "/login";
+        }
+      } finally {
+          if(document.querySelector("#spinner"))document.querySelector("#spinner").remove();
+      }
+    }
+
+    //Agregando un nuevo animal, haciendo funcion del formulario de add animal
+    formAnimals.addEventListener("submit", async (e) => {
+      e.preventDefault();
+  
+      const infoAnimal = {
+        name: e.target.name.value,
+        description: e.target.description.value,
+        grupo: e.target.grupo.value,
+        nacimiento: e.target.nacimiento.value,
+        propietario: e.target.propietario.value,
+        file: e.target.file.files[0]
+      }
+
+      if(
+        !infoAnimal.name ||
+        !infoAnimal.description ||
+        !infoAnimal.grupo ||
+        !infoAnimal.nacimiento ||
+        !infoAnimal.propietario ||
+        !infoAnimal.file
+      ){
+        alert("Los campos son obligatorios");
+        return;
+      }
+
+      message.innerHTML = "";
+      try{
+        const {data} = await axios.post("/api/animal", infoAnimal, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            //por headers pasamos el token por authorization
+            Authorization: `Bearer ${token}`
+          }
+        })
+        if(data.ok){
+          loadAllAnimalsData();
+          formAnimals.reset();
+          modal.hide();
+          message.innerHTML = `<div class="bg-success d-flex justify-content-center align-items-center py-2 mb-3">
+            <p class="text-white fs-5 fw-light text-center m-0">¡Se creo el registro de tu animalito!</p>
+          </div>`;
+        }
+      } catch(error) {
+        console.log(error)
+        message.innerHTML = `<div class="bg-danger d-flex justify-content-center align-items-center py-2 mb-3">
+          <p class="text-white fs-5 fw-light text-center m-0">¡Hubo un error en la insercion del animalito, revisa tu información!</p>
+        </div>`;
+      } finally {
+        setTimeout(function(){
+          message.innerHTML = "";
+        }, 6000);
+      }
+    });
+
+    //Buscador
+    searchAnimal.addEventListener("input", (e) => {
+      contenedorInfoAnimals.innerHTML = ""
+      let miData = buscarAnimal(e.target.value, dataAnimals)
+      if(!e.target.value){
+        //console.log("Esta vacio");
+        loadAllAnimalsData()
+      }else{
+        //console.log("Esta con letras");
+        miData.forEach(animal => {
+          contenedorInfoAnimals.innerHTML += `
+              <div class="col">
+                <div class="card">
+                  <img class="card-img-top ratio ratio-4x3" src="/img/files/${animal.foto}" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">${animal.nombre.slice(0,20)}</h5>
+                    <p class="card-text">${animal.description.slice(0,50)}...</p>
+                    <p class="card-text">
+                      <a href="#" class="text-muted">
+                        <i class="bi bi-tag"></i>
+                        <span>${animal.specie}</span>
+                      </a>
+                    </p>
+                  </div>
+                  <div class="card-footer">
+                    <a href="#" id="linkModalAnimal" class="text-primary" data-bs-toggle="modal" data-bs-target="#detailsAnimal" data-animal="${animal.pid}">Ver más...</a>
+                  </div>
+                </div>
+              </div>
+            `
+        })
+      }
+    })
+
+  </script>
+</html>

@@ -26,4 +26,8 @@ router.get("/tasks", (req, res) => {
     res.sendFile(publicpath + "/tasks.html")
 })
 
+router.get("/animals", (req, res) => {
+    res.sendFile(publicpath + "/animals.html")
+})
+
 export default router;
